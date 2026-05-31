@@ -6,14 +6,14 @@ from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 
-from backend.services.languages import (
+from services.languages import (
     get_language_name,
     get_language_options,
     get_whisper_language,
     is_supported_language,
 )
-from backend.services.transcriber import transcribe_audio
-from backend.services.translator import translate_text as run_translation
+from services.transcriber import transcribe_audio
+from services.translator import translate_text as run_translation
 
 
 ROOT_DIR = Path(__file__).resolve().parents[1]
