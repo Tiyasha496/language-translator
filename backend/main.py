@@ -6,17 +6,17 @@ from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 
-from services.languages import (
+from backend.services.languages import (
     get_language_name,
     get_language_options,
     get_whisper_language,
     is_supported_language,
 )
-from services.transcriber import transcribe_audio
-from services.translator import translate_text as run_translation
+from backend.services.transcriber import transcribe_audio
+from backend.services.translator import translate_text as run_translation
 
 
-ROOT_DIR = Path(__file__).resolve().parent
+ROOT_DIR = Path(__file__).resolve().parents[1]
 FRONTEND_DIR = ROOT_DIR / "frontend"
 
 app = FastAPI(title="Universal Language Translator")
@@ -29,7 +29,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-#app.mount("/static", StaticFiles(directory=FRONTEND_DIR), name="static")
+app.mount("/static", StaticFiles(directory=FRONTEND_DIR), name="static")
 
 
 class TranslationRequest(BaseModel):
@@ -40,8 +40,8 @@ class TranslationRequest(BaseModel):
 
 @app.get("/")
 def home():
-    return {"message": "API is running"}
-    #return FileResponse(FRONTEND_DIR / "index.html")
+    #return {"message": "API is running"}
+    return FileResponse(FRONTEND_DIR / "index.html")
 
 
 @app.get("/api/languages")
