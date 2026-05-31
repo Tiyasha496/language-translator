@@ -16,7 +16,7 @@ from services.transcriber import transcribe_audio
 from services.translator import translate_text as run_translation
 
 
-ROOT_DIR = Path(__file__).resolve().parents[1]
+ROOT_DIR = Path(__file__).resolve().parent
 FRONTEND_DIR = ROOT_DIR / "frontend"
 
 app = FastAPI(title="Universal Language Translator")
@@ -29,7 +29,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.mount("/static", StaticFiles(directory=FRONTEND_DIR), name="static")
+#app.mount("/static", StaticFiles(directory=FRONTEND_DIR), name="static")
 
 
 class TranslationRequest(BaseModel):
@@ -40,7 +40,8 @@ class TranslationRequest(BaseModel):
 
 @app.get("/")
 def home():
-    return FileResponse(FRONTEND_DIR / "index.html")
+    return {"message": "API is running"}
+    #return FileResponse(FRONTEND_DIR / "index.html")
 
 
 @app.get("/api/languages")
