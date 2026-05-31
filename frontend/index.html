@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Python Project</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <div class="noise"></div>
+
+    <header class="topbar">
+      <div class="logo">
+
+  <div class="logo-circle">
+    🌐
+  </div>
+
+  <div>
+    <div class="logo-text">
+      Language Translator
+    </div>
+
+    <div class="logo-subtitle">
+      Translate text and audio between languages
+    </div>
+  </div>
+
+</div>
+      <p class="topbar-sub">translate anything, anywhere</p>
+    </header>
+
+    <main class="app-shell">
+      <section class="hero">
+
+  <h1>Language Translator</h1>
+
+  <p>
+    A simple translation tool built using Python,
+    FastAPI and speech recognition.
+  </p>
+
+</section>
+
+      <!-- language selector bar -->
+      <div class="lang-bar">
+        <div class="lang-field">
+          <span class="lang-label">FROM</span>
+          <select id="sourceLanguage"></select>
+        </div>
+        <button class="swap-btn" id="swapBtn" title="Swap languages">⇄</button>
+        <div class="lang-field">
+          <span class="lang-label">TO</span>
+          <select id="targetLanguage"></select>
+        </div>
+      </div>
+
+      <!-- tabs -->
+      <div class="tabs">
+        <button class="tab active" data-tab="text">✏️ Text</button>
+        <button class="tab" data-tab="audio">🎙️ Audio</button>
+      </div>
+
+      <!-- text tab -->
+      <div class="tab-content active" id="tab-text">
+        <div class="input-wrap">
+          <textarea
+            id="inputText"
+            placeholder="paste or type something here..."
+            spellcheck="false"
+          ></textarea>
+          <span class="char-count" id="charCount">0</span>
+        </div>
+        <button class="action-btn" id="translateBtn" type="button">
+          <span class="btn-label">Translate →</span>
+          <span class="btn-loader" hidden>...</span>
+        </button>
+      </div>
+
+      <!-- audio tab -->
+      <div class="tab-content" id="tab-audio">
+        <label class="drop-zone" id="dropZone">
+          <div class="drop-icon">🎵</div>
+          <p class="drop-text">Drop an audio file here or <span class="drop-link">browse</span></p>
+          <p class="drop-hint">mp3, wav, m4a, ogg — whatever you've got</p>
+          <input id="audioFile" type="file" accept="audio/*" hidden />
+          <div class="file-chosen" id="fileChosen" hidden></div>
+        </label>
+        <button class="action-btn" id="audioBtn" type="button">
+          <span class="btn-label">Transcribe + Translate →</span>
+          <span class="btn-loader" hidden>...</span>
+        </button>
+      </div>
+
+      <!-- result -->
+      <div class="result-card" id="resultCard">
+        <div class="result-status-row">
+          <span class="result-dot" id="resultDot"></span>
+          <span class="result-status" id="status">ready</span>
+        </div>
+        <div class="result-cols">
+          <div class="result-col">
+            <p class="result-col-label">input / transcript</p>
+            <p class="result-text" id="transcript">—</p>
+          </div>
+          <div class="result-divider"></div>
+          <div class="result-col">
+            <p class="result-col-label">translation</p>
+            <p class="result-text" id="translation">—</p>
+            <button class="copy-btn" id="copyBtn" title="Copy translation" hidden>copy 📋</button>
+          </div>
+        </div>
+      </div>
+
+    </main>
+
+    <footer class="footer">
+      Language translation using python
+    </footer>
+
+    <script src="/static/app.js"></script>
+  </body>
+</html>
